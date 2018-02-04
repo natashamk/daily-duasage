@@ -1,0 +1,44 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<angular4-notify-notifications-container></angular4-notify-notifications-container>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Daily D<strong>ua</strong>sage</h1>
+    </div>
+    <div class="col-md-8" bg-2>
+      <div *ngIf="flag">
+        <h3>{{onedua.name}}</h3>
+        <h2>{{onedua.arabic}}</h2>
+        <br>
+        <p class="translit"> {{onedua.transliteration}} </p>
+        <br>
+        <p>{{onedua.translation}}</p>
+        <br>
+        <p class="desknotif"><small>Coming soon: Desktop notifications to help you remember your daily prayers!</small></p>
+        <button [disabled]="!check" class="btn-primary" type="submit" (click)="notifyMe()"> Remind Me!</button>
+        <br>
+        <br>
+      </div>
+      <div *ngIf="!flag">
+        <div class="col-md-6 col-md-offset-3" id="temp">
+          <h2>Choose a prayer on the right to get started.</h2>
+          <h1>➡️</h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 sidebar-offcanvas" bg-3 id="sidebar" role="navigation">
+      <div class="well sidebar-nav">
+        <input type="text" id="myInput" [(ngModel)]='duaSearch2' placeholder="Search for Dua..">
+        <ul id="myUL" class="nav" *ngFor="let dua of duas | search: duaSearch2">
+          <li> <button type="submit" (click)="getOneDuaFromService(dua.name)" class="btn-link"> {{dua.name}}</button></li>
+        </ul>
+      </div>
+    </div>
+    <!-- <div class="col-md-12">
+      <p>Don't see a prayer you're looking for? Contact us at dailyduasage@gmail.com to have it added today!</p>
+    </div> -->
+  </div>
+</div>
